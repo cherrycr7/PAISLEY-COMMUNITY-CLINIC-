@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Paisley Community Clinic in Kenya provides healthcare services 24 hours a day, every day.">
+  <title>Paisley Community Clinic | Open 24 Hours</title>
+
+  <style>
+    :root {
+      --navy: #003b85;
+      --deep: #001c43;
+      --blue: #006acb;
+      --sky: #d9edff;
+      --cyan: #009fe8;
+      --ink: #092d60;
+      --muted: #425f80;
+      --white: #fff;
+      --green: #08b86a;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { width: 100%; display: block; object-fit: cover; }
+    button, input, select, textarea { font: inherit; }
+
+    .topbar {
+      background: var(--navy);
+      color: white;
+      padding: 9px 5%;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 12px;
+    }
+
+    .open-status {
+      color: #b8ffd8;
+      font-weight: bold;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,.98);
+      box-shadow: 0 2px 12px #0c376012;
+    }
+
+    .nav {
+      max-width: 1240px;
+      margin: auto;
+      padding: 13px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brandmark {
+      width: 46px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg,var(--cyan),var(--navy));
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 27px;
+      font-weight: bold;
+    }
+
+    .brand strong { display: block; font-size: 21px; }
+    .brand small { color: var(--blue); }
+
+    .navlinks {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .navlinks a:hover { color: var(--cyan); }
+
+    .menu-btn {
+      display: none;
+      border: 0;
+      padding: 8px 12px;
+      background: var(--sky);
+      color: var(--navy);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 30px;
+      padding: 12px 21px;
+      background: linear-gradient(100deg,var(--cyan),var(--navy));
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-green { background: var(--green); }
+    .btn-outline { background: transparent; border: 1px solid var(--blue); color: var(--blue); }
+
+    .hero {
+      min-height: 440px;
+      display: grid;
+      align-items: center;
+      background:
+        linear-gradient(90deg,rgba(226,242,255,.98) 0%,rgba(226,242,255,.90) 45%,rgba(226,242,255,.20) 100%),
+        url("https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=85")
+        center/cover no-repeat;
+    }
+
+    .hero-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 55px 24px;
+    }
+
+    .eyebrow {
+      color: var(--navy);
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .hero h1 {
+      max-width: 600px;
+      font-size: clamp(36px,5vw,58px);
+      line-height: 1.1;
+      margin: 12px 0;
+    }
+
+    .hero h1 em { color: var(--cyan); font-style: normal; }
+
+    .hero p {
+      max-width: 510px;
+      color: #263f5f;
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .hours-banner {
+      background: #e2fff0;
+      color: #075d39;
+      padding: 15px 20px;
+      text-align: center;
+      font-weight: bold;
+      border-bottom: 1px solid #b7efd1;
+    }
+
+    .service-strip {
+      background: linear-gradient(90deg,#e5f3ff,#d8ebff,#edf7ff);
+      display: grid;
+      grid-template-columns: repeat(6,1fr);
+      padding: 23px 3%;
+    }
+
+    .strip-item {
+      text-align: center;
+      padding: 0 8px;
+      border-right: 1px solid #c8e2f6;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .strip-item:last-child { border: 0; }
+
+    .round-icon {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      margin: 0 auto 8px;
+      background: #d8efff;
+      color: var(--blue);
+      font-size: 23px;
+    }
+
+    section { padding: 55px 24px; }
+
+    .container { max-width: 1180px; margin: auto; }
+
+    .section-heading { margin-bottom: 22px; }
+
+    .section-heading h2,
+    .about-copy h2 {
+      font-size: 29px;
+      line-height: 1.2;
+      margin: 0 0 10px;
+    }
+
+    .section-heading p,
+    .about-copy p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .photo {
+      height: 300px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px #153d6415;
+    }
+
+    .services-section {
+      background: linear-gradient(120deg,#d5eaff,#c8e2ff);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: white;
+      border: 1px solid #e1edf7;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px #0b3b6510;
+      transition: transform .2s;
+    }
+
+    .service-card:hover { transform: translateY(-4px); }
+
+    .service-card img { height: 190px; }
+
+    .card-body { padding: 17px; }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 17px;
+      margin: 0 0 8px;
+    }
+
+    .mini-icon {
+      background: #e1f3ff;
+      color: var(--blue);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+    }
+
+    .service-card p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .learn { color: var(--blue); font-size: 13px; font-weight: bold; }
+
+    .appointment {
+      background: linear-gradient(100deg,#07509a,#00356c);
+      color: white;
+      padding: 30px 24px;
+    }
+
+    .appointment-inner {
+      max-width: 1180px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .appointment h2 { margin: 0; }
+    .appointment p { color: #e0efff; }
+
+    footer {
+      background: linear-gradient(115deg,#052a4b,#001a31);
+      color: white;
+    }
+
+    .footer-grid {
+      max-width: 1180px;
+      margin: auto;
+      padding: 38px 24px;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 28px;
+    }
+
+    .footer-grid h3 { font-size: 15px; }
+    .footer-grid p,.footer-grid a { font-size: 12px; color: #d1e0ef; display: block; margin: 7px 0; }
+    .copyright { text-align: center; padding: 15px; border-top: 1px solid #ffffff20; font-size: 11px; color: #c1d3e5; }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: #00182bd9;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-panel {
+      background: white;
+      border-radius: 16px;
+      width: min(100%,520px);
+      padding: 25px;
+      max-height: 90vh;
+      overflow: auto;
+    }
+
+    .modal-head { display: flex; justify-content: space-between; align-items: center; }
+    .modal-head h2 { font-size: 23px; }
+    .close { border: 0; background: #edf6fc; border-radius: 50%; padding: 7px 12px; cursor: pointer; font-size: 22px; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+    .field { display: flex; flex-direction: column; gap: 5px; font-size: 12px; font-weight: bold; }
+    .field.full { grid-column: 1/-1; }
+    .field input,.field select,.field textarea { width: 100%; padding: 11px; border: 1px solid #cbddeb; border-radius: 8px; }
+    .field textarea { min-height: 75px; }
+    .form-note { font-size: 12px; color: var(--muted); }
+
+    @media(max-width:900px) {
+      .navlinks { gap: 10px; }
+      .navlinks a { font-size: 11px; }
+      .cards { grid-template-columns: repeat(2,1fr); }
+      .footer-grid { grid-template-columns: repeat(2,1fr); }
+    }
+
+    @media(max-width:650px) {
+      .topbar { justify-content: center; text-align: center; }
+      .nav { padding: 12px 16px; }
+      .brand strong { font-size: 18px; }
+      .menu-btn { display: block; }
+      .navlinks {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 20px;
+        box-shadow: 0 12px 20px #0c376018;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .navlinks.show { display: flex; }
+      .hero { min-height: 440px; }
+      .hero-inner { padding: 40px 20px; }
+      .service-strip { grid-template-columns: repeat(3,1fr); row-gap: 18px; }
+      .strip-item:nth-child(3) { border-right: 0; }
+      section { padding: 40px 18px; }
+      .about-grid,.cards { grid-template-columns: 1fr; }
+      .photo { height: 230px; }
+      .appointment-inner { align-items: flex-start; }
+      .footer-grid { grid-template-columns: 1fr 1fr; padding: 28px 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+    }
+  </style>
+  <link rel="icon" href="./logo.jpeg" type="image/jpeg">
+</head>
+
+<body>
+  <div class="topbar">
+    <div>📍 Nairobi, Kenya &nbsp; | &nbsp; ☎ +254 113 296 359</div>
+    <div class="open-status">🟢 OPEN 24 HOURS · 7 DAYS A WEEK</div>
+  </div>
+
+  <header>
+    <nav class="nav">
+      <a class="brand" href="#home">
+        <span class="brandmark">♥️</span>
+        <span><strong>Paisley Community Clinic</strong><small>Your Health, Our Priority</small></span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation">☰</button>
+
+      <div class="navlinks" id="navlinks">
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#team">Our Team</a>
+        <a href="#contact">Contact</a>
+        <button class="btn" data-open-booking>Book Appointment</button>
+      </div>
+    </nav>
+    <link rel="icon" href="./logo.jpeg" type="image/jpeg">
+  </header>
+
+  <main>
+    <section class="hero" id="home">d
+      <div class="hero-inner">
+        <div class="eyebrow">Open 24 Hours · Every Day</div>
+        <h1>Your Health,<br>Our <em>Priority.</em></h1>
+        <p>
+          Welcome to Paisley Community Clinic. We are committed to compassionate,
+          respectful healthcare for individuals and families, day and night.
+        </p>
+        <div class="actions">
+          <button class="btn" data-open-booking>Book an Appointment</button>
+          <a class="btn btn-outline" href="#services">Explore Our Services</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="hours-banner">
+      🕒 PAISLEY COMMUNITY CLINIC IS OPEN 24 HOURS A DAY, 7 DAYS A WEEK
+      <br>Contact us anytime for enquiries about our services.
+    </div>
+
+    <div class="service-strip">
+      <div class="strip-item"><div class="round-icon">✚</div>General Consultation</div>
+      <div class="strip-item"><div class="round-icon">♧</div>Pharmacy</div>
+      <div class="strip-item"><div class="round-icon">♡</div>Emergency Care</div>
+      <div class="strip-item"><div class="round-icon">♧</div>Child Healthcare</div>
+      <div class="strip-item"><div class="round-icon">⚗</div>Laboratory Tests</div>
+      <div class="strip-item"><div class="round-icon">✚</div>Other Services</div>
+    </div>
+
+    <section id="about">
+      <div class="container about-grid">
+        <img class="photo"
+          src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=85"
+          alt="Healthcare professional providing patient care" loading="lazy">
+
+        <div class="about-copy">
+          <div class="eyebrow">Welcome to Paisley Clinic</div>
+          <h2>Professional Care, With Compassion</h2>
+          <p>
+            Your health and wellbeing matter. Paisley Clinic aims to provide
+            welcoming healthcare services for individuals and families in Kenya.
+          </p>
+          <p>
+            We are open 24 hours a day, every day. Contact our team to ask
+            about available services and appointment options.
+          </p>
+          <div class="actions">
+            <a class="btn" href="#services">View Our Services</a>
+            <a class="btn btn-outline" href="#contact">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-section" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">How We Can Help</div>
+          <h2>Our Healthcare Services</h2>
+          <p>Explore our services and contact us to confirm availability.</p>
+        </div>
+
+        <div class="cards">
+          <article class="service-card" id="general">
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=85"
+              alt="Doctor consulting with a patient" loading="lazy">
+            <div class="card-body">
+              <h3 class="card-title"><span class="mini-icon">✚</span>General Consultation</h3>
+              <p>Consultation and guidance for general health concerns and wellbeing.</p>
+              <a class="learn" href="#contact" data-service="General Consultation">Enquire now →</a>
+            </div>
+          </article>
+
+          <article class="service-card" id="pharmacy">
+            <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=700&q=85"
+              alt="Many medicines and medicine boxes" loading="lazy">
+            <div class="card-body">
+              <h3 class="card-title"><span class="mini-icon">✚</span>Pharmacy</h3>
+              <p>Access to medicines and guidance on their proper use, subject to availability.</p>
+              <a class="learn" href="#contact" data-service="Pharmacy">Enquire now →</a>
+            </div>
+          </article>
+
+          <article class="service-card" id="emergency">
+            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=700&q=85"
+              alt="Hospital bed in a patient room" loading="lazy">
+            <div class="card-body">
+              <h3 class="card-title"><span class="mini-icon">✚</span>Emergency Care</h3>
+              <p>Urgent assessment and guidance. For life-threatening emergencies, seek urgent local assistance.</p>
+              <a class="learn" href="#contact" data-service="Emergency Care">Contact us →</a>
+            </div>
+          </article>
+
+          <article class="service-card" id="child">
+            <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=700&q=85"
+              alt="Infant baby resting peacefully" loading="lazy">
+            <div class="card-body">
+              <h3 class="card-title"><span class="mini-icon">♧</span>Child Healthcare</h3>
+              <p>Infant and child health support, growth monitoring and guidance for common childhood concerns.</p>
+              <a class="learn" href="#contact" data-service="Child Healthcare">Enquire now →</a>
+            </div>
+          </article>
+
+          <article class="service-card" id="laboratory">
+            <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=700&q=85"
+              alt="Laboratory test bottles and sample containers" loading="lazy">
+            <div class="card-body">
+              <h3 class="card-title"><span class="mini-icon">⚗</span>Laboratory Tests</h3>
+              <p>Laboratory testing and sample collection depending on available services.</p>
+              <a class="learn" href="#contact" data-service="Laboratory Tests">Enquire now →</a>
+            </div>
+          </article>
+
+          <article class="service-card" id="other">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=85"
+              alt="Healthcare professional at work" loading="lazy">
+            <div class="card-body">
+              <h3 class="card-title"><span class="mini-icon">•••</span>Other Services</h3>
+              <p>Contact our team to ask about additional healthcare services and availability.</p>
+              <a class="learn" href="#contact" data-service="Other Services">Ask us →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="team">
+      <div class="container about-grid">
+        <img class="photo"
+          src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=900&q=85"
+          alt="Doctor in a clinical setting" loading="lazy">
+
+        <div class="about-copy">
+          <div class="eyebrow">Patient-Centred Care</div>
+          <h2>Care That Puts You First</h2>
+          <p>
+            Every patient deserves to be treated with respect, privacy and
+            compassion. Contact Paisley Community Clinic to ask about our team,
+            available services and appointment options.
+          </p>
+          <p><strong>Opening hours:</strong> 24 hours a day, 7 days a week.</p>
+          <a class="btn" href="#contact">Contact Our Team</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="appointment" id="contact">
+      <div class="appointment-inner">
+        <div>
+          <h2>We're Here for You — 24/7</h2>
+          <p>Open 24 hours a day, every day. Send an appointment request or contact us on WhatsApp.</p>
+          <p><strong>Phone:</strong> +254 113 296 359</p>
+        </div>
+        <div class="actions">
+          <button class="btn btn-green" data-whatsapp>Chat on WhatsApp</button>
+          <button class="btn" data-open-booking>Book an Appointment</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#home">
+          <span class="brandmark">♥️</span>
+          <span><strong>Paisley Community Clinic</strong><small style="display:block;color:#cfe9ff">Your Health, Our Priority</small></span>
+        </a>
+        <p>Healthcare with compassion, respect and care.</p>
+        <p><strong>OPEN 24 HOURS · EVERY DAY</strong></p>
+      </div>
+
+      <div>
+        <h3>Quick Links</h3>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#team">Our Team</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div>
+        <h3>Our Services</h3>
+        <a href="#general">General Consultation</a>
+        <a href="#pharmacy">Pharmacy</a>
+        <a href="#emergency">Emergency Care</a>
+        <a href="#child">Child Healthcare</a>
+        <a href="#laboratory">Laboratory Tests</a>
+        <a href="#other">Other Services</a>
+      </div>
+
+      <div>
+        <h3>Contact Us</h3>
+        <p>Nairobi, Kenya</p>
+        <a href="tel:+254113296359">☎ +254 113 296 359</a>
+        <a href="#" data-whatsapp>WhatsApp Us</a>
+        <p>Opening hours: 24/7</p>
+      </div>
+    </div>
+    <div class="copyright">
+      ©️ <span id="year"></span> Paisley Community Clinic. All rights reserved.
+    </div>
+  </footer>
+
+  <div class="modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <h2 id="bookingTitle">Request an Appointment</h2>
+        <button class="close" id="closeModal" aria-label="Close">×</button>
+      </div>
+
+      <p class="form-note">
+        Complete the form and your request will open in WhatsApp.
+        The clinic must reply to confirm your appointment.
+      </p>
+
+      <form id="bookingForm">
+        <div class="form-grid">
+          <label class="field">Full name
+            <input name="name" required autocomplete="name" placeholder="Your name">
+          </label>
+
+          <label class="field">Phone number
+            <input name="phone" required type="tel" autocomplete="tel" placeholder="07xx xxx xxx">
+          </label>
+
+          <label class="field">Preferred date
+            <input name="date" required type="date" id="bookingDate">
+          </label>
+
+          <label class="field">Service
+            <select name="service" required>
+              <option value="">Choose a service</option>
+              <option>General Consultation</option>
+              <option>Pharmacy</option>
+              <option>Emergency Care</option>
+              <option>Child Healthcare</option>
+              <option>Laboratory Tests</option>
+              <option>Other Services</option>
+            </select>
+          </label>
+
+          <label class="field full">Additional note (optional)
+            <textarea name="note" placeholder="Briefly tell us what you need."></textarea>
+          </label>
+        </div>
+
+        <p class="form-note">
+          For a life-threatening emergency, seek urgent local emergency assistance.
+          Do not wait for a website or WhatsApp reply.
+        </p>
+
+        <button class="btn" style="width:100%" type="submit">
+          Send Request on WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const clinicWhatsApp = "254113296359";
+    const modal = document.getElementById("bookingModal");
+    const form = document.getElementById("bookingForm");
+    const menuBtn = document.getElementById("menuBtn");
+    const navlinks = document.getElementById("navlinks");
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const dateInput = document.getElementById("bookingDate");
+    const today = new Date();
+    dateInput.min =
+      `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
+
+    function openBooking(service = "") {
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+      if (service) form.elements.service.value = service;
+    }
+
+    function closeBooking() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll("[data-open-booking]").forEach(button => {
+      button.addEventListener("click", () => {
+        navlinks.classList.remove("show");
+        openBooking();
+      });
+    });
+
+    document.getElementById("closeModal").addEventListener("click", closeBooking);
+
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeBooking();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeBooking();
+    });
+
+    document.querySelectorAll("[data-whatsapp]").forEach(button => {
+      button.addEventListener("click", event => {
+        event.preventDefault();
+        const message = "Hello Paisley Community Clinic, I would like to enquire about your healthcare services.";
+        window.open(
+          `https://wa.me/${clinicWhatsApp}?text=${encodeURIComponent(message)}`,
+          "_blank"
+        );
+      });
+    });
+
+    document.querySelectorAll("[data-service]").forEach(link => {
+      link.addEventListener("click", event => {
+        event.preventDefault();
+        openBooking(link.dataset.service);
+      });
+    });
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = navlinks.classList.toggle("show");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navlinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => navlinks.classList.remove("show"));
+    });
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const data = new FormData(form);
+
+      const message = [
+        "Hello Paisley Community Clinic, I would like to request an appointment.",
+        `Name: ${data.get("name")}`,
+        `Phone: ${data.get("phone")}`,
+        `Preferred date: ${data.get("date")}`,
+        `Service: ${data.get("service")}`,
+        data.get("note") ? `Additional note: ${data.get("note")}` : ""
+      ].filter(Boolean).join("\n");
+
+      window.open(
+        `https://wa.me/${clinicWhatsApp}?text=${encodeURIComponent(message)}`,
+        "_blank"
+      );
+    });
+  </script>
+</body>
+</html>
